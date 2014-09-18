@@ -1042,14 +1042,14 @@ class Cookies(dict):
                 cookie_dict = {'name': name, 'value': value}
                 try:
                     cookie = self.cookie_class.from_dict(cookie_dict)
-                except InvalidCookieError:
+                except CookieError:
                     if not ignore_bad_cookies:
                         raise
                 else:
                     cookie_objects.append(cookie)
         try:
             self.add(*cookie_objects)
-        except InvalidCookieError:
+        except CookieError:
             if not ignore_bad_cookies:
                 raise
             _report_invalid_cookie(header_data)
